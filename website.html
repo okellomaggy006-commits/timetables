@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIMETABLES</title>
+</head>
+<div class="container">
+<script>
+    function searchTable(){
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let selectedCourse = document.getElementById("courseSelect").value;
+        let visibleTable;
+        if(selectedCourse === "cs"){
+            visibleTable = document.querySelector("#csContainer table");
+        } else {
+            visibleTable = document.querySelector("#mtpContainer table");
+        }
+        if (!visibleTable) return;
+        let rows = visibleTable.querySelectorAll("tr");
+        rows.forEach((row, index) => {
+            if(index === 0) return; 
+            let text = row.innerText.toLowerCase();
+            if (text.includes(input)){
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+    function switchTable(){
+        let selectedCourse = document.getElementById("courseSelect").value;
+        let cs = document.getElementById("csContainer");
+        let mtp = document.getElementById("mtpContaner");
+        if(selectedCourse === "cs"){
+            cs.classList.add("visible");
+            mtp.classList.remove("visible");
+        } else {
+            mtp.classList.add("visible");
+            cs.classList.remove("visible");
+        };
+    }
+</script>
+<body style="background-image: url(images/picture.jfif);">
+<header>
+    <h1 style="color:maroon; border-bottom:dashed 2px;">STUDENTS' TIMETABLE PORTAL</h1>
+    <P><strong>ACCESS UNIT SCHEDULES AND TIMES </strong></P>
+</header>
+    <style>
+        .timetable {
+            max-height:0;
+            opacity: 0;
+            overflow: hidden;
+            transition: opacity 0.4s ease, max-height 0.4s ease;
+        }
+        .visible {
+            max-height: 1000px;
+            opacity: 1; 
+        }
+        .hidden {
+            opacity: 0;
+            max-height: 0;
+            pointer-events: none;
+        }
+        header{
+            color:black;
+            padding:20px;
+            text-align:center;
+            margin-bottom:20px;
+        }
+        .container{
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .timetable {
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+        select {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        #courseSelect{
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+    </style>
+    <label font-style="oblique">SELECT COURSE:</label>
+    <select id="courseSelect" onchange="switchTable()">
+        <option value="cs">Computer Science Year 3</option>
+        <option value="mtp">Music Technology and Production Year 2</option>
+    </select>
+    <style>
+        select{
+            padding: 8px;
+            margin: 10px 0 20px 10px;
+        }
+    </style>
+    <br><br>
+    <input type="text" id="searchInput" placeholder="Search by Unit or Day..." onkeyup="searchTable()">
+    <div id="csContainer" class="timetable visible">
+         <h2>COMPUTER SCIENCE TIMETABLE</h2>
+<table border="1" style="border:1px solid black; width: 50%;">
+<tr>
+                <th>DAY</th>
+                <th>7.00AM-10.00AM</th>
+                <th>10.00AM-1.00PM</th>
+                <th>1.00PM-4.00PM</th>
+                <th>4.00PM-7.00PM</th>
+            </tr>
+            <tr>
+                <td>MONDAY</td>
+                <td></td>
+                <td>Business Entrepreneurship(BMGT 214)</td>
+                <td></td>
+                <td>Web Applications Programming(COMP 310)</td>
+            </tr>
+            <tr>
+                <td>TUESDAY</td>
+                <td>Numerical Analysis(MATH 314)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>WEDNESDAY</td>
+                <td>Software Engineering(COMP 313)</td>
+                <td></td>
+                <td>Operations Research(COMP 315)</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>THURSDAY</td>
+                <td></td>
+                <td>Design and Analysis of Algorithms(COMP 311)</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>FRIDAY</td>
+                <td></td>
+                <td>Computer Networks(COMP 312)</td>
+                <td></td>
+                <td></td>
+            </tr>
+</table>
+</div>
+<div id="mtpContaner" class="timetable" >
+    <h2>MUSIC TECHNOLOGY AND PRODUCTION TIMETABLE</h2>
+    <table border="1" style="border:1px solid black; width: 50%;">
+      <tr>
+        <th>DAY</th>
+                <th>7.00AM-10.00AM</th>
+                <th>10.00AM-1.00PM</th>
+                <th>1.00PM-4.00PM</th>
+                <th>4.00PM-7.00PM</th>
+      </tr>  
+      <tr>
+        <td>MONDAY</td>
+        <td>Piano Lesson</td>
+        <td></td>
+        <td>Microphone Theory</td>
+        <td>Fundamentals of Acoustics</td>
+      </tr>
+      <tr>
+        <td>TUESDAY</td>
+        <td>Theory and Musicianship</td>
+        <td>Audio Tech</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>WEDNESDAY</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>THURSDAY</td>
+        <td>Orchestral Arrangement</td>
+        <td>Christian Ethics</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>FRIDAY</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+</div>
+</body>
+</div>
+</html>
